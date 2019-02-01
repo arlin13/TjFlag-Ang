@@ -1,4 +1,6 @@
 {
     "terminal.integrated.fontSize": 10,
-    "editor.fontSize": 13
+    "editor.fontSize": 13,
+    "javascript.preferences.quoteStyle": "double",
+    "typescript.preferences.quoteStyle": "double"
 }
