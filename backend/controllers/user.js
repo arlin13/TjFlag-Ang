@@ -42,12 +42,11 @@ exports.userLogin = (req, res, next) => {
       if (!result) {
         return res.status(401).json({
           message: 'User pssw is invalid failed'
-          // message: 'Auth failed'
         });
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        'secret_this_should_be_longer',
+        process.env.JTW_KEY,
         { expiresIn: '1h' }
       );
       res.status(200).json({
@@ -57,6 +56,7 @@ exports.userLogin = (req, res, next) => {
       });
     })
     .catch(err => {
+      console.log(err);
       return res.status(401).json({
         message: 'Invalid authentication credentials'
       });
