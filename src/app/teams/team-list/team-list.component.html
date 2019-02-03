@@ -1,0 +1,45 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<span class="spacer"></span>
+
+<div>
+  <h1>EQUIPOS</h1>
+</div>
+
+<mat-accordion multi="true" *ngIf="teams.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let team of teams">
+    <mat-expansion-panel-header>
+      {{ team.name }}
+    </mat-expansion-panel-header>
+    <mat-grid-list cols="4" rowHeight="2:1">
+      <mat-grid-tile colspan="1">
+        <div class="team-image">
+          <img [src]="team.imagePath" [alt]="team.name" />
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3">
+        <span>Ciudad: {{ team.city }}</span>
+        <span>Jugadores: Pendiente</span>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-action-row *ngIf="userIsAuthenticated && userId === team.creator">
+      <a mat-button color="primary" [routerLink]="['/teams/edit', team.id]"
+        >EDIT</a
+      >
+      <button mat-button color="warn" (click)="onDelete(team.id)">
+        DELETE
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator
+  [length]="totalTeams"
+  [pageSize]="teamsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)"
+  *ngIf="teams.length > 0"
+>
+</mat-paginator>
+<p class="info-text mat-body-1" *ngIf="teams.length <= 0 && !isLoading">
+  No teams added yet
+</p>

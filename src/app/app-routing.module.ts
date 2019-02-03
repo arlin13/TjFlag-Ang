@@ -6,6 +6,8 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PlayerListComponent } from './players/player-list/player-list.component';
 import { PlayerCreateComponent } from './players/player-create/player-create.component';
 import { HomeComponent } from './home/home.component';
+import { TeamListComponent } from './teams/team-list/team-list.component';
+import { TeamCreateComponent } from './teams/team-create/team-create.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +27,17 @@ const routes: Routes = [
   {
     path: 'players/edit/:playerId',
     component: PlayerCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'teams', component: TeamListComponent },
+  {
+    path: 'teams/create',
+    component: TeamCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'teams/edit/:teamId',
+    component: TeamCreateComponent,
     canActivate: [AuthGuard]
   }
 ];

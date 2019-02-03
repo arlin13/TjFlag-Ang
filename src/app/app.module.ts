@@ -13,6 +13,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { HomeModule } from './home/home.module';
 import { PostsModule } from './posts/posts.module';
 import { PlayerModule } from './players/players.module';
+import { TeamModule } from './teams/teams.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ErrorComponent],
@@ -24,7 +25,8 @@ import { PlayerModule } from './players/players.module';
     AngularMaterialModule,
     HomeModule,
     PostsModule,
-    PlayerModule
+    PlayerModule,
+    TeamModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

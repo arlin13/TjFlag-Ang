@@ -7,6 +7,7 @@ const keys = require('../config/keys');
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 const playersRoutes = require('./routes/players');
+const teamsRoutes = require('./routes/teams');
 
 const app = express();
 
@@ -44,5 +45,6 @@ app.use((req, res, next) => {
 app.use('/api/posts', postsRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/players', playersRoutes);
+app.use('/api/teams', teamsRoutes);
 
 module.exports = app;

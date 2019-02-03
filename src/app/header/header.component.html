@@ -1,11 +1,17 @@
 <mat-toolbar color="primary">
   <span><a routerLink="/">TjFlag</a></span> <span class="spacer"></span>
   <span><a routerLink="/players">Jugadores</a></span>
+  <span class="spacer"></span><span><a routerLink="/teams">Equipos</a></span>
   <span class="spacer"></span>
   <ul>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/players/create" routerLinkActive="mat-accent"
         >Crear jugador</a
+      >
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/teams/create" routerLinkActive="mat-accent"
+        >Crear equipo</a
       >
     </li>
     <!-- <li *ngIf="userIsAuthenticated">

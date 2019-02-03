@@ -1,0 +1,69 @@
+<mat-card>
+  <h1>EQUIPO</h1>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <hr />
+  <form [formGroup]="form" (submit)="onSaveTeam()" *ngIf="!isLoading">
+    <!-- name -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Nombre" formControlName="name" />
+      <mat-error *ngIf="form.get('name').invalid">
+        Please enter name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- city -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Ciudad" formControlName="city" />
+      <mat-error *ngIf="form.get('city').invalid">
+        Please enter name
+      </mat-error>
+    </mat-form-field>
+
+    <!-- category -->
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Categoria"
+        formControlName="category"
+      />
+      <mat-error *ngIf="form.get('category').invalid">
+        Please enter date of birth
+      </mat-error>
+    </mat-form-field>
+
+    <!-- mode -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Rama" formControlName="mode" />
+      <mat-error *ngIf="form.get('mode').invalid">
+        Please enter mode
+      </mat-error>
+    </mat-form-field>
+
+    <!-- coach -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Coach" formControlName="coach" />
+      <mat-error *ngIf="form.get('coach').invalid">
+        Please enter coach
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">
+        Pick Image
+      </button>
+      <input type="file" #filePicker (change)="onImagePicked($event)" />
+    </div>
+    <div
+      class="image-preview"
+      *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="form.value.name" />
+    </div>
+
+    <button mat-raised-button color="accent" type="submit">
+      Guardar equipo
+    </button>
+  </form>
+</mat-card>

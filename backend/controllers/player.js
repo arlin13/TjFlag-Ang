@@ -42,7 +42,7 @@ exports.updatePlayer = (req, res, next) => {
     name: req.body.name,
     lastname: req.body.lastname,
     dateOfBirth: req.body.dateOfBirth,
-    sex: req.body.dateOfBirth,
+    sex: req.body.sex,
     number: req.body.number,
     division: req.body.division,
     status: req.body.status,
@@ -58,6 +58,7 @@ exports.updatePlayer = (req, res, next) => {
       }
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: "Couldn't update player"
       });
