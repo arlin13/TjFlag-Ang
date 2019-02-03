@@ -1,11 +1,18 @@
 <mat-toolbar color="primary">
-  <span><a routerLink="/">My Messages</a></span> <span class="spacer"></span>
+  <span><a routerLink="/">TjFlag</a></span> <span class="spacer"></span>
+  <span><a routerLink="/players">Jugadores</a></span>
+  <span class="spacer"></span>
   <ul>
     <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/players/create" routerLinkActive="mat-accent"
+        >Crear jugador</a
+      >
+    </li>
+    <!-- <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/create" routerLinkActive="mat-accent"
         >Create post</a
       >
-    </li>
+    </li> -->
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent"
         >Login</a
