@@ -1,5 +1,5 @@
 <mat-card>
-  <h1>EQUIPO</h1>
+  <h1>AGREGR EQUIPO</h1>
 
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <hr />
@@ -62,6 +62,9 @@
       <img [src]="imagePreview" [alt]="form.value.name" />
     </div>
 
+    <button mat-raised-button color="accent">
+      <span><a routerLink="/teams"> Cancelar</a></span>
+    </button>
     <button mat-raised-button color="accent" type="submit">
       Guardar equipo
     </button>

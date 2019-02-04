@@ -2,45 +2,110 @@
 <span class="spacer"></span>
 
 <div>
-  <h1>JUGADORES</h1>
-</div>
+  <div id="top" class="clearfix">
+    <h1>JUGADORES</h1>
+    <div class="right top-bottom-small-margin" *ngIf="userIsAuthenticated">
+      <span><a routerLink="/players/create"> + Agregar</a></span>
+    </div>
+  </div>
 
-<mat-accordion multi="true" *ngIf="players.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let player of players">
-    <mat-expansion-panel-header>
-      # {{ player.number }} - {{ player.name }} {{ player.lastname }}
-    </mat-expansion-panel-header>
-    <mat-grid-list cols="4" rowHeight="2:1">
-      <mat-grid-tile colspan="1">
-        <div class="player-image">
-          <img [src]="player.imagePath" [alt]="player.name" />
+  <div id="filters">
+    <mat-card>
+      <mat-card-subtitle>
+        <p class="top-bottom-margin">Filtrando en base a:</p>
+      </mat-card-subtitle>
+
+      <mat-card-content>
+        <mat-grid-list cols="3" rowHeight="30px">
+          <!-- Sexo -->
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-select
+                [(value)]="selectedSex"
+                (selectionChange)="onSelectionChange()"
+                placeholder="Sexo"
+              >
+                <mat-option value="Cualquiera">Cualquiera</mat-option>
+                <mat-option value="Hombre">Hombre</mat-option>
+                <mat-option value="Mujer">Mujer</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <!-- Division -->
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-select
+                [(value)]="selectedDivision"
+                (selectionChange)="onSelectionChange()"
+                placeholder="Division"
+              >
+                <mat-option value="Cualquiera">Cualquiera</mat-option>
+                <mat-option value="Gold">Gold</mat-option>
+                <mat-option value="Top">Top</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+
+      <mat-card-footer>
+        <div class="clearfix top-bottom-small-margin">
+          <button class="right" mat-button (click)="onResetFilters()">
+            Resetear filtros
+          </button>
         </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="3">
-        <span>Fecha de nacimiento: {{ player.dateOfBirth }}</span>
-        <span>Division: {{ player.division }}</span>
-        <span>Equipos(s): Pendiente</span>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <hr />
 
-    <mat-action-row *ngIf="userIsAuthenticated && userId === player.creator">
-      <a mat-button color="primary" [routerLink]="['/players/edit', player.id]"
-        >EDIT</a
-      >
-      <button mat-button color="warn" (click)="onDelete(player.id)">
-        DELETE
-      </button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-paginator
-  [length]="totalPlayers"
-  [pageSize]="playersPerPage"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangedPage($event)"
-  *ngIf="players.length > 0"
->
-</mat-paginator>
-<p class="info-text mat-body-1" *ngIf="players.length <= 0 && !isLoading">
-  No players added yet
-</p>
+  <div id="playerList">
+    <mat-accordion multi="true" *ngIf="players.length > 0 && !isLoading">
+      <mat-expansion-panel *ngFor="let player of filteredPlayers">
+        <mat-expansion-panel-header>
+          # {{ player.number }} - {{ player.name }} {{ player.lastname }}
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="4" rowHeight="2:1">
+          <mat-grid-tile colspan="1">
+            <div class="player-image">
+              <img [src]="player.imagePath" [alt]="player.name" />
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <span>Fecha de nacimiento: {{ player.dateOfBirth }}</span>
+            <span>Division: {{ player.division }}</span>
+            <span>Equipos(s): Pendiente</span>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-action-row
+          *ngIf="userIsAuthenticated && userId === player.creator"
+        >
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/players/edit', player.id]"
+            >EDIT</a
+          >
+          <button mat-button color="warn" (click)="onDelete(player.id)">
+            DELETE
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div id="paginator">
+    <mat-paginator
+      [length]="totalPlayers"
+      [pageSize]="playersPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangedPage($event)"
+      *ngIf="players.length > 0"
+    >
+    </mat-paginator>
+  </div>
+
+  <p class="info-text mat-body-1" *ngIf="players.length <= 0 && !isLoading">
+    No players added yet
+  </p>
+</div>

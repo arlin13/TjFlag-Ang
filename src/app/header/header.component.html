@@ -1,36 +1,37 @@
 <mat-toolbar color="primary">
-  <span><a routerLink="/">TjFlag</a></span> <span class="spacer"></span>
-  <span><a routerLink="/players">Jugadores</a></span>
-  <span class="spacer"></span><span><a routerLink="/teams">Equipos</a></span>
-  <span class="spacer"></span>
-  <ul>
-    <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/players/create" routerLinkActive="mat-accent"
-        >Crear jugador</a
-      >
-    </li>
-    <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/teams/create" routerLinkActive="mat-accent"
-        >Crear equipo</a
-      >
-    </li>
-    <!-- <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/create" routerLinkActive="mat-accent"
-        >Create post</a
-      >
-    </li> -->
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent"
-        >Login</a
-      >
-    </li>
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/auth/signup" routerLinkActive="mat-accent"
-        >Signup</a
-      >
-    </li>
-    <li *ngIf="userIsAuthenticated">
-      <button mat-button (click)="onLogout()">Logout</button>
-    </li>
-  </ul>
+  <!-- <mat-toolbar-row>
+    <span class="spacer"></span>
+    <ul>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent"
+          >Login</a
+        >
+      </li>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/auth/signup" routerLinkActive="mat-accent"
+          >Signup</a
+        >
+      </li>
+      <li *ngIf="userIsAuthenticated">
+        <button mat-button (click)="onLogout()">Logout</button>
+      </li>
+    </ul>
+  </mat-toolbar-row> -->
+
+  <mat-toolbar-row>
+    <span><a routerLink="/">TjFlag</a></span>
+    <span class="spacer"></span>
+    <ul>
+      <li>
+        <a mat-button routerLink="/players" routerLinkActive="mat-accent"
+          >Jugadores</a
+        >
+      </li>
+      <li>
+        <a mat-button routerLink="/teams" routerLinkActive="mat-accent"
+          >Equipos</a
+        >
+      </li>
+    </ul>
+  </mat-toolbar-row>
 </mat-toolbar>

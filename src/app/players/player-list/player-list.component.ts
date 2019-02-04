@@ -13,7 +13,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class PlayerListComponent implements OnInit, OnDestroy {
   players: Player[] = [];
+  filteredPlayers: Player[] = [];
   isLoading = false;
+  showFilters = false;
   totalPlayers = 0;
   playersPerPage = 5;
   currentPage = 1;
@@ -22,6 +24,9 @@ export class PlayerListComponent implements OnInit, OnDestroy {
   userId: string;
   private playersSub: Subscription;
   private authStateSubs: Subscription;
+
+  selectedSex;
+  selectedDivision;
 
   constructor(
     public playersService: PlayersService,
@@ -38,6 +43,7 @@ export class PlayerListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.totalPlayers = playerData.playerCount;
         this.players = playerData.players;
+        this.filteredPlayers = this.players;
       });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStateSubs = this.authService
@@ -46,6 +52,43 @@ export class PlayerListComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+  }
+
+  onResetFilters() {
+    this.selectedSex = 'Cualquiera';
+    this.selectedDivision = 'Cualquiera';
+    this.filteredPlayers = this.players;
+    this.totalPlayers = this.filteredPlayers.length;
+  }
+
+  onSelectionChange() {
+    this.filteredPlayers = this.players;
+    this.filterBySex();
+    this.filterByDivision();
+    this.totalPlayers = this.filteredPlayers.length;
+  }
+
+  filterBySex() {
+    if (this.selectedSex != null && this.selectedSex !== 'Cualquiera') {
+      this.filteredPlayers = this.filteredPlayers.filter(
+        t => t.sex === this.selectedSex
+      );
+    } else {
+      this.filteredPlayers = this.filteredPlayers;
+    }
+  }
+
+  filterByDivision() {
+    if (
+      this.selectedDivision != null &&
+      this.selectedDivision !== 'Cualquiera'
+    ) {
+      this.filteredPlayers = this.filteredPlayers.filter(
+        t => t.division === this.selectedDivision
+      );
+    } else {
+      this.filteredPlayers = this.filteredPlayers;
+    }
   }
 
   onChangedPage(pageData: PageEvent) {

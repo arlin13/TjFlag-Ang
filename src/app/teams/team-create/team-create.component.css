@@ -15,6 +15,10 @@ input[type='file'] {
   visibility: hidden;
 }
 
+button {
+  margin: 5px;
+}
+
 .image-preview {
   height: 5rem;
   margin: 1rem 0;

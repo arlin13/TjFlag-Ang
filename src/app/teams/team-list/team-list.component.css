@@ -23,3 +23,23 @@ mat-paginator {
   width: 75%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
+
+.top-bottom-margin {
+  margin: 20px 0;
+}
+
+.top-bottom-small-margin {
+  margin: 5px 0;
+}
+
+.horizontal-left {
+  text-align: left;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.right {
+  float: right;
+}
