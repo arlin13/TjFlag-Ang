@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div id="filters">
+  <div id="filters" *ngIf="teams.length > 0">
     <mat-card>
       <mat-card-subtitle>
         <p class="top-bottom-margin">Filtrando en base a:</p>
@@ -92,7 +92,7 @@
             <span>Categoria: {{ team.category }}</span>
             <span>Rama: {{ team.mode }}</span>
             <span>Coach: {{ team.coach }}</span>
-            <span>Jugadores: Pendiente</span>
+            <!-- <span>Jugadores: Pendiente</span> -->
           </mat-grid-tile>
         </mat-grid-list>
         <mat-action-row *ngIf="userIsAuthenticated && userId === team.creator">

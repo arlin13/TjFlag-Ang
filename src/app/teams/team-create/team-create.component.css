@@ -27,3 +27,11 @@ button {
 .image-preview img {
   height: 100%;
 }
+
+.clearfix {
+  overflow: auto;
+}
+
+.right {
+  float: right;
+}

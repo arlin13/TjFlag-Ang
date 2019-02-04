@@ -1,48 +1,53 @@
 <mat-card>
-  <h1>AGREGR EQUIPO</h1>
+  <h1>AGREGAR EQUIPO</h1>
 
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <hr />
   <form [formGroup]="form" (submit)="onSaveTeam()" *ngIf="!isLoading">
     <!-- name -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
       <input matInput type="text" placeholder="Nombre" formControlName="name" />
       <mat-error *ngIf="form.get('name').invalid">
-        Please enter name
+        *Campo obligatorio
       </mat-error>
     </mat-form-field>
 
     <!-- city -->
-    <mat-form-field>
-      <input matInput type="text" placeholder="Ciudad" formControlName="city" />
-      <mat-error *ngIf="form.get('city').invalid">
-        Please enter name
-      </mat-error>
+    <mat-form-field appearance="outline">
+      <mat-label>Ciudad</mat-label>
+      <mat-select placeholder="Ciudad" formControlName="city" required>
+        <mat-option value="Tijuana">Tijuana</mat-option>
+        <mat-option value="Ensenada">Ensenada</mat-option>
+        <mat-option value="Mexicali">Mexicali</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('city')">*Campo obligatorio</mat-error>
     </mat-form-field>
 
     <!-- category -->
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        placeholder="Categoria"
-        formControlName="category"
-      />
-      <mat-error *ngIf="form.get('category').invalid">
-        Please enter date of birth
-      </mat-error>
+    <mat-form-field appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="category" required>
+        <mat-option value="Abierta">Abierta</mat-option>
+        <mat-option value="Mini">Mini</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('category')">*Campo obligatorio</mat-error>
     </mat-form-field>
 
     <!-- mode -->
-    <mat-form-field>
-      <input matInput type="text" placeholder="Rama" formControlName="mode" />
-      <mat-error *ngIf="form.get('mode').invalid">
-        Please enter mode
-      </mat-error>
+    <mat-form-field appearance="outline">
+      <mat-label>Rama</mat-label>
+      <mat-select formControlName="mode" required>
+        <mat-option value="Femenil">Femenil</mat-option>
+        <mat-option value="Varonil">Varonil</mat-option>
+        <mat-option value="Mixta">Mixta</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('mode')">*Campo obligatorio</mat-error>
     </mat-form-field>
 
     <!-- coach -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Coach</mat-label>
       <input matInput type="text" placeholder="Coach" formControlName="coach" />
       <mat-error *ngIf="form.get('coach').invalid">
         Please enter coach
@@ -62,11 +67,13 @@
       <img [src]="imagePreview" [alt]="form.value.name" />
     </div>
 
-    <button mat-raised-button color="accent">
-      <span><a routerLink="/teams"> Cancelar</a></span>
-    </button>
-    <button mat-raised-button color="accent" type="submit">
-      Guardar equipo
-    </button>
+    <div class="clearfix">
+      <button mat-raised-button color="accent">
+        <span><a routerLink="/teams"> Cancelar</a></span>
+      </button>
+      <button mat-raised-button color="accent" class="right" type="submit">
+        Guardar equipo
+      </button>
+    </div>
   </form>
 </mat-card>

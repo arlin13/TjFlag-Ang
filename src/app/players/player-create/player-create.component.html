@@ -4,7 +4,8 @@
   <hr />
   <form [formGroup]="form" (submit)="onSavePlayer()" *ngIf="!isLoading">
     <!-- name -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
       <input matInput type="text" placeholder="Nombre" formControlName="name" />
       <mat-error *ngIf="form.get('name').invalid">
         Please enter name
@@ -12,7 +13,8 @@
     </mat-form-field>
 
     <!-- lastname -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido</mat-label>
       <input
         matInput
         type="text"
@@ -25,31 +27,40 @@
     </mat-form-field>
 
     <!-- dateofbirth -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <input
         matInput
-        type="text"
-        placeholder="Fecha de nacimiento"
         formControlName="dateOfBirth"
+        placeholder="01/01/1990"
+        [matDatepicker]="myDatepicker"
       />
-      <mat-error *ngIf="form.get('dateOfBirth').invalid">
-        Please enter date of birth
-      </mat-error>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="myDatepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
     </mat-form-field>
 
     <!-- sex -->
-    <mat-form-field>
-      <input matInput type="text" placeholder="Sexo" formControlName="sex" />
+    <mat-form-field appearance="outline">
+      <mat-label>Sexo</mat-label>
+      <mat-select formControlName="sex" required>
+        <mat-option value="Mujer">Mujer</mat-option>
+        <mat-option value="Hombre">Hombre</mat-option>
+      </mat-select>
       <mat-error *ngIf="form.get('sex').invalid">
-        Please enter sex
+        *Campo obligtorio
       </mat-error>
     </mat-form-field>
 
     <!-- number -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Numero</mat-label>
       <input
         matInput
-        type="text"
+        type="number"
+        min="0"
+        max="100"
         placeholder="Numero"
         formControlName="number"
       />
@@ -59,28 +70,26 @@
     </mat-form-field>
 
     <!-- division -->
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        placeholder="Division"
-        formControlName="division"
-      />
+    <mat-form-field appearance="outline">
+      <mat-label>Division</mat-label>
+      <mat-select formControlName="division" required>
+        <mat-option value="Gold">Gold</mat-option>
+        <mat-option value="Top">Top</mat-option>
+      </mat-select>
       <mat-error *ngIf="form.get('division').invalid">
-        Please enter division
+        *Campo obligtorio
       </mat-error>
     </mat-form-field>
 
     <!-- status -->
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        placeholder="Status"
-        formControlName="status"
-      />
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" required>
+        <mat-option value="Activo">Activo</mat-option>
+        <mat-option value="Inactivo">Inactivo</mat-option>
+      </mat-select>
       <mat-error *ngIf="form.get('status').invalid">
-        Please enter status
+        *Campo obligtorio
       </mat-error>
     </mat-form-field>
 
@@ -97,8 +106,13 @@
       <img [src]="imagePreview" [alt]="form.value.name" />
     </div>
 
-    <button mat-raised-button color="accent" type="submit">
-      Guardar jugador
-    </button>
+    <div class="clearfix">
+      <button mat-raised-button color="accent">
+        <span><a routerLink="/players"> Cancelar</a></span>
+      </button>
+      <button mat-raised-button color="accent" class="right" type="submit">
+        Guardar jugador
+      </button>
+    </div>
   </form>
 </mat-card>

@@ -44,15 +44,22 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
       name: new FormControl(null, {
         validators: [Validators.required]
       }),
-      city: new FormControl(null, { validators: [Validators.required] }),
-      category: new FormControl(null),
-      mode: new FormControl(null, { validators: [Validators.required] }),
+      city: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      category: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      mode: new FormControl(null, {
+        validators: [Validators.required]
+      }),
       coach: new FormControl(null),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       })
     });
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('teamId')) {
         this.formMode = 'edit';

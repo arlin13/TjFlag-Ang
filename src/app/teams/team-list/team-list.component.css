@@ -11,6 +11,10 @@ mat-paginator {
   margin-top: 1rem;
 }
 
+h1 {
+  text-align: center;
+}
+
 .info-text {
   text-align: center;
 }
