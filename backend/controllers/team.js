@@ -12,7 +12,6 @@ exports.createTeam = (req, res, next) => {
     creator: req.userData.userId,
     players: JSON.parse(req.body.players)
   });
-  console.log(team);
   team
     .save()
     .then(createdTeam => {
@@ -83,6 +82,7 @@ exports.getTeams = (req, res, next) => {
       return Team.countDocuments();
     })
     .then(count => {
+      console.log(fetchedTeams);
       res.status(200).json({
         message: 'Teams fetched succesfully',
         teams: fetchedTeams,

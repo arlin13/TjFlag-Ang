@@ -8,6 +8,7 @@ import { PlayerCreateComponent } from './players/player-create/player-create.com
 import { HomeComponent } from './home/home.component';
 import { TeamListComponent } from './teams/team-list/team-list.component';
 import { TeamCreateComponent } from './teams/team-create/team-create.component';
+import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: 'teams/edit/:teamId',
     component: TeamCreateComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'teams/detail/:teamId',
+    component: TeamDetailComponent
   }
 ];
 

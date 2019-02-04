@@ -1,0 +1,27 @@
+<mat-card>
+  <h1>{{ team.name }}</h1>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <h3>INFORMACION GENERAL</h3>
+  <hr />
+  <!-- city -->
+  <mat-label>Ciudad: {{ team.city }}</mat-label>
+  <br />
+  <!-- category -->
+  <mat-label>Categoria: {{ team.category }}</mat-label>
+  <br />
+  <!-- mode -->
+  <mat-label>Rama: {{ team.mode }}</mat-label>
+  <br />
+  <!-- coach -->
+  <mat-label>Coach: {{ team.coach }}</mat-label>
+  <br />
+
+  <h3>JUGADORES</h3>
+  <hr />
+  <mat-label *ngFor="let player of team.players">{{ player }}</mat-label>
+
+  <h3>PROXIMOS JUEGOS</h3>
+  <hr />
+</mat-card>

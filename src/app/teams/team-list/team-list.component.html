@@ -79,7 +79,12 @@
     <mat-accordion multi="true" *ngIf="teams.length > 0 && !isLoading">
       <mat-expansion-panel *ngFor="let team of filteredTeams">
         <mat-expansion-panel-header>
-          {{ team.name }}
+          <mat-panel-title>
+            {{ team.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Categoria: {{ team.category }}
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-grid-list cols="4" rowHeight="2:1">
           <mat-grid-tile colspan="1">
@@ -89,18 +94,32 @@
           </mat-grid-tile>
           <mat-grid-tile colspan="3">
             <span>Ciudad: {{ team.city }}</span>
-            <span>Categoria: {{ team.category }}</span>
             <span>Rama: {{ team.mode }}</span>
             <span>Coach: {{ team.coach }}</span>
             <span>Jugadores: {{ team.players }}</span>
           </mat-grid-tile>
         </mat-grid-list>
-        <mat-action-row *ngIf="userIsAuthenticated && userId === team.creator">
-          <a mat-button color="primary" [routerLink]="['/teams/edit', team.id]"
-            >EDIT</a
+        <mat-action-row>
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/teams/detail', team.id]"
+            >VER MÁS</a
           >
-          <button mat-button color="warn" (click)="onDelete(team.id)">
-            DELETE
+          <a
+            mat-button
+            *ngIf="userIsAuthenticated && userId === team.creator"
+            color="primary"
+            [routerLink]="['/teams/edit', team.id]"
+            >EDITAR</a
+          >
+          <button
+            *ngIf="userIsAuthenticated && userId === team.creator"
+            mat-button
+            color="warn"
+            (click)="onDelete(team.id)"
+          >
+            BORRAR
           </button>
         </mat-action-row>
       </mat-expansion-panel>
