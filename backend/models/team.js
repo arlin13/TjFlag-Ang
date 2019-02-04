@@ -7,7 +7,12 @@ const teamSchema = mongoose.Schema({
   mode: { type: String, required: true },
   coach: { type: String, required: true },
   imagePath: { type: String, required: true },
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
 });
 
 module.exports = mongoose.model('Team', teamSchema);

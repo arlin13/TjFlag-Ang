@@ -7,6 +7,8 @@ import { TeamsService } from '../teams.service';
 import { Team } from '../team.model';
 import { mimeType } from './mime-type.validator';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Player } from '../../players/player.model';
+import { PlayersService } from 'src/app/players/players.service';
 
 @Component({
   selector: 'app-team-create',
@@ -21,15 +23,26 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
   mode = '';
   division = '';
   coach = '';
+
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+
+  playersPerPage = 20;
+  currentPlayerPage = 1;
+  totalPlayers = 0;
+  allPlayers: Player[] = [];
+  selectedPlayers: string[] = [];
+  players: any[] = [];
+
   private formMode = 'create';
   private teamId: string;
+  private playersSub: Subscription;
   private authStatusSub: Subscription;
 
   constructor(
     public teamsService: TeamsService,
+    public playersService: PlayersService,
     public route: ActivatedRoute,
     public authService: AuthService
   ) {}
@@ -57,7 +70,8 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
-      })
+      }),
+      players: new FormControl(null)
     });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -75,7 +89,8 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
             mode: teamData.mode,
             coach: teamData.coach,
             imagePath: teamData.imagePath,
-            creator: teamData.creator
+            creator: teamData.creator,
+            players: teamData.players
           };
           this.form.setValue({
             name: this.team.name,
@@ -83,7 +98,8 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
             category: this.team.category,
             mode: this.team.mode,
             coach: this.team.coach,
-            image: this.team.imagePath
+            image: this.team.imagePath,
+            players: this.team.players
           });
         });
       } else {
@@ -91,6 +107,19 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
         this.teamId = null;
       }
     });
+
+    this.getListOfPlayers();
+  }
+
+  getListOfPlayers() {
+    this.playersService.getPlayers(this.playersPerPage, this.currentPlayerPage);
+    this.playersSub = this.playersService
+      .getPlayerUpdateListener()
+      .subscribe((playerData: { players: Player[]; playerCount: number }) => {
+        this.isLoading = false;
+        this.totalPlayers = playerData.playerCount;
+        this.allPlayers = playerData.players;
+      });
   }
 
   onImagePicked(event: Event) {
@@ -104,19 +133,33 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(file);
   }
 
+  onSelectionChange(player) {
+    if (this.selectedPlayers.includes(player.id)) {
+      this.selectedPlayers = this.selectedPlayers.filter(
+        id => id !== player.id
+      );
+    } else {
+      this.selectedPlayers.push(player.id);
+    }
+  }
+
   onSaveTeam() {
     if (this.form.invalid) {
+      console.log('invalid form');
+      console.log(this.form);
       return;
     }
     this.isLoading = true;
     if (this.formMode === 'create') {
+      console.log(this.selectedPlayers);
       this.teamsService.addTeam(
         this.form.value.name,
         this.form.value.city,
         this.form.value.category,
         this.form.value.mode,
         this.form.value.coach,
-        this.form.value.image
+        this.form.value.image,
+        this.selectedPlayers
       );
     } else {
       this.teamsService.updateTeam(
@@ -126,7 +169,8 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
         this.form.value.category,
         this.form.value.mode,
         this.form.value.coach,
-        this.form.value.image
+        this.form.value.image,
+        this.selectedPlayers
       );
     }
 

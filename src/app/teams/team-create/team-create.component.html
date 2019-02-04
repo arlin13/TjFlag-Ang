@@ -54,6 +54,23 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- teams -->
+    <hr />
+    <mat-card>
+      <mat-card-subtitle>Selecciona jugadore(s)</mat-card-subtitle>
+      <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="75px">
+          <mat-grid-tile *ngFor="let player of allPlayers">
+            <mat-selection-list (selectionChange)="onSelectionChange(player)">
+              <mat-list-option>
+                {{ player.name }} {{ player.lastname }}
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+
     <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">
         Pick Image

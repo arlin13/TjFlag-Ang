@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Team } from './team.model';
+import { Player } from '../players/player.model';
 
 const BACKEND_URL = environment.apiUrl + '/teams/';
 
@@ -37,7 +38,8 @@ export class TeamsService {
                 mode: team.mode,
                 coach: team.coach,
                 imagePath: team.imagePath,
-                creator: team.creator
+                creator: team.creator,
+                players: team.players
               };
             }),
             maxTeams: teamData.maxTeams
@@ -67,6 +69,7 @@ export class TeamsService {
       coach: string;
       imagePath: string;
       creator: string;
+      players: any[];
     }>(BACKEND_URL + id);
   }
 
@@ -76,7 +79,8 @@ export class TeamsService {
     category: string,
     mode: string,
     coach: string,
-    image: File
+    image: File,
+    players: string[]
   ) {
     const teamData = new FormData();
     teamData.append('name', name);
@@ -85,6 +89,7 @@ export class TeamsService {
     teamData.append('mode', mode);
     teamData.append('coach', coach);
     teamData.append('image', image, name);
+    teamData.append('players', JSON.stringify(players));
 
     this.http
       .post<{ message: string; team: Team }>(BACKEND_URL, teamData)
@@ -100,7 +105,8 @@ export class TeamsService {
     category: string,
     mode: string,
     coach: string,
-    image: File | string
+    image: File | string,
+    players: string[]
   ) {
     let teamData: Team | FormData;
     if (typeof image === 'object') {
@@ -111,6 +117,7 @@ export class TeamsService {
       teamData.append('mode', mode);
       teamData.append('coach', coach);
       teamData.append('image', image, name);
+      teamData.append('players', JSON.stringify(players));
     } else {
       teamData = {
         id: id,
@@ -120,7 +127,8 @@ export class TeamsService {
         mode: mode,
         coach: coach,
         imagePath: image,
-        creator: null
+        creator: null,
+        players: players
       };
     }
     this.http.put(BACKEND_URL + id, teamData).subscribe(response => {

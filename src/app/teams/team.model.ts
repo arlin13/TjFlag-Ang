@@ -7,4 +7,5 @@ export interface Team {
   coach: string;
   imagePath: string;
   creator: string;
+  players: string[];
 }

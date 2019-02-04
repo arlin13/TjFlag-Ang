@@ -9,8 +9,10 @@ exports.createTeam = (req, res, next) => {
     mode: req.body.mode,
     coach: req.body.coach,
     imagePath: url + '/images/' + req.file.filename,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    players: JSON.parse(req.body.players)
   });
+  console.log(team);
   team
     .save()
     .then(createdTeam => {
@@ -23,6 +25,7 @@ exports.createTeam = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: 'Creating a team failed'
       });
@@ -31,9 +34,13 @@ exports.createTeam = (req, res, next) => {
 
 exports.updateTeam = (req, res, next) => {
   let imagePath = req.body.imagePath;
+  let players = req.body.players;
   if (req.file) {
     const url = req.protocol + '://' + req.get('host');
     imagePath = url + '/images/' + req.file.filename;
+  }
+  if (typeof req.userData.players === 'string') {
+    players = JSON.parse(players);
   }
   const team = new Team({
     _id: req.body.id,
@@ -43,7 +50,8 @@ exports.updateTeam = (req, res, next) => {
     mode: req.body.mode,
     coach: req.body.coach,
     imagePath: imagePath,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    players: players
   });
   Team.updateOne({ _id: req.params.id, creator: req.userData.userId }, team)
     .then(result => {
@@ -54,6 +62,7 @@ exports.updateTeam = (req, res, next) => {
       }
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: "Couldn't update team"
       });

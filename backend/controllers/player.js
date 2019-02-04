@@ -9,7 +9,7 @@ exports.createPlayer = (req, res, next) => {
     sex: req.body.sex,
     number: req.body.number,
     division: req.body.division,
-    status: 'Active',
+    status: req.body.status,
     imagePath: url + '/images/' + req.file.filename,
     creator: req.userData.userId
   });
