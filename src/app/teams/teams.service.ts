@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Team } from './team.model';
-import { Player } from '../players/player.model';
 
 const BACKEND_URL = environment.apiUrl + '/teams/';
 

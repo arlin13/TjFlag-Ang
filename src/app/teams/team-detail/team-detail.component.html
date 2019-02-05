@@ -1,27 +1,74 @@
+<mat-grid-list cols="6" rowHeight="2:1">
+  <mat-grid-tile colspan="1">
+    <div class="team-image">
+      <img [src]="team.imagePath" [alt]="team.name" />
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="5">
+    <h1>
+      {{ team.name }}
+    </h1>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<hr />
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
 <mat-card>
-  <h1>{{ team.name }}</h1>
+  <mat-card-header>
+    <div mat-card-avatar class="header-gral-info-image"></div>
+    <mat-card-title>
+      Informacion General
+    </mat-card-title>
+    <mat-card-subtitle>Secundaria</mat-card-subtitle>
+  </mat-card-header>
 
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-content>
+    <mat-label>Ciudad: {{ team.city }}</mat-label>
+    <mat-label>Categoria: {{ team.category }}</mat-label>
+    <mat-label>Rama: {{ team.mode }}</mat-label>
+    <mat-label>Coach: {{ team.coach }}</mat-label>
+  </mat-card-content>
+</mat-card>
 
-  <h3>INFORMACION GENERAL</h3>
-  <hr />
-  <!-- city -->
-  <mat-label>Ciudad: {{ team.city }}</mat-label>
-  <br />
-  <!-- category -->
-  <mat-label>Categoria: {{ team.category }}</mat-label>
-  <br />
-  <!-- mode -->
-  <mat-label>Rama: {{ team.mode }}</mat-label>
-  <br />
-  <!-- coach -->
-  <mat-label>Coach: {{ team.coach }}</mat-label>
-  <br />
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-gral-info-image"></div>
+    <mat-card-title>
+      Jugadores
+    </mat-card-title>
+    <mat-card-subtitle>Secundaria</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li *ngFor="let player of team?.players">
+        {{ player }}
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>
 
-  <h3>JUGADORES</h3>
-  <hr />
-  <mat-label *ngFor="let player of team.players">{{ player }}</mat-label>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-gral-info-image"></div>
+    <mat-card-title>
+      Proximos juegos
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Pending
+  </mat-card-content>
+</mat-card>
 
-  <h3>PROXIMOS JUEGOS</h3>
-  <hr />
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-gral-info-image"></div>
+    <mat-card-title>
+      Records
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Campeonas 2018
+  </mat-card-content>
 </mat-card>

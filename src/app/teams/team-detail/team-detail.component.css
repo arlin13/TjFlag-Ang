@@ -1,0 +1,16 @@
+.mat-card {
+  margin: 10px 0;
+}
+
+.header-gral-info-image {
+  background-image: url('https://cdn.bleacherreport.net/images/team_logos/328x328/college_football.png');
+  background-size: cover;
+}
+
+.team-image {
+  widows: 100%;
+}
+
+.team-image img {
+  width: 75%;
+}
