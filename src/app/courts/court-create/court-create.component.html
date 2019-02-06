@@ -1,0 +1,90 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <h1>CANCHA</h1>
+  <hr />
+  <form [formGroup]="form" (submit)="onSaveCourt()" *ngIf="!isLoading">
+    <!-- name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" placeholder="Nombre" formControlName="name" />
+      <mat-error *ngIf="form.get('name').invalid">
+        Please enter name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ciudad</mat-label>
+      <mat-select placeholder="Ciudad" formControlName="city" required>
+        <mat-option value="Tijuana">Tijuana</mat-option>
+        <mat-option value="Ensenada">Ensenada</mat-option>
+        <mat-option value="Mexicali">Mexicali</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('city')">*Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <!-- description -->
+    <mat-form-field appearance="outline">
+      <mat-label>Descripcion</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Descripcion"
+        formControlName="description"
+      />
+    </mat-form-field>
+
+    <!-- latitude -->
+    <mat-form-field appearance="outline">
+      <mat-label>Latitud</mat-label>
+      <input
+        matInput
+        type="number"
+        min="-200"
+        max="200"
+        placeholder="Latitude"
+        formControlName="latitude"
+      />
+      <mat-error *ngIf="form.get('latitude').invalid">
+        Please enter latitude
+      </mat-error>
+    </mat-form-field>
+
+    <!-- number -->
+    <mat-form-field appearance="outline">
+      <mat-label>Longitud</mat-label>
+      <input
+        matInput
+        type="number"
+        min="-200"
+        max="200"
+        placeholder="Longitud"
+        formControlName="longitude"
+      />
+      <mat-error *ngIf="form.get('longitude').invalid">
+        Please enter longitude
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">
+        Pick Image
+      </button>
+      <input type="file" #filePicker (change)="onImagePicked($event)" />
+    </div>
+    <div
+      class="image-preview"
+      *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="form.value.name" />
+    </div>
+
+    <div class="clearfix">
+      <button mat-raised-button color="accent">
+        <span><a routerLink="/courts"> Cancelar</a></span>
+      </button>
+      <button mat-raised-button color="accent" class="right" type="submit">
+        Guardar cancha
+      </button>
+    </div>
+  </form>
+</mat-card>

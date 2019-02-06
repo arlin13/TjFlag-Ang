@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { TeamsService } from '../teams.service';
 import { Team } from '../team.model';
-import { Player } from 'src/app/players/player.model';
 
 @Component({
   selector: 'app-team-detail',
@@ -39,7 +37,6 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
         creator: teamData.creator,
         players: teamData.players
       };
-      console.log(this.team);
       this.isLoading = false;
     });
   }

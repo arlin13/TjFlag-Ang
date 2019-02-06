@@ -97,7 +97,7 @@ export class PlayersService {
     this.http
       .post<{ message: string; player: Player }>(BACKEND_URL, playerData)
       .subscribe(responseData => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/players']);
       });
   }
 

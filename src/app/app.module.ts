@@ -14,6 +14,7 @@ import { HomeModule } from './home/home.module';
 import { PostsModule } from './posts/posts.module';
 import { PlayerModule } from './players/players.module';
 import { TeamModule } from './teams/teams.module';
+import { CourtModule } from './courts/court.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ErrorComponent],
@@ -26,6 +27,7 @@ import { TeamModule } from './teams/teams.module';
     HomeModule,
     PostsModule,
     PlayerModule,
+    CourtModule,
     TeamModule
   ],
   providers: [
