@@ -1,3 +1,5 @@
+import { Player } from '../players/player.model';
+
 export interface Team {
   id: string;
   name: string;
@@ -7,5 +9,5 @@ export interface Team {
   coach: string;
   imagePath: string;
   creator: string;
-  players: string[];
+  players: Player[];
 }

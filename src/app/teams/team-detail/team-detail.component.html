@@ -1,74 +1,53 @@
-<mat-grid-list cols="6" rowHeight="2:1">
-  <mat-grid-tile colspan="1">
-    <div class="team-image">
-      <img [src]="team.imagePath" [alt]="team.name" />
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <h1>
-      {{ team.name }}
-    </h1>
-  </mat-grid-tile>
-</mat-grid-list>
-
-<hr />
-
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <mat-card>
   <mat-card-header>
-    <div mat-card-avatar class="header-gral-info-image"></div>
-    <mat-card-title>
-      Informacion General
-    </mat-card-title>
-    <mat-card-subtitle>Secundaria</mat-card-subtitle>
+    <mat-card-title>{{ team.name.toUpperCase() }}</mat-card-title>
+    <!-- <mat-card-subtitle>{{ team.category }}</mat-card-subtitle> -->
   </mat-card-header>
 
   <mat-card-content>
-    <mat-label>Ciudad: {{ team.city }}</mat-label>
-    <mat-label>Categoria: {{ team.category }}</mat-label>
-    <mat-label>Rama: {{ team.mode }}</mat-label>
-    <mat-label>Coach: {{ team.coach }}</mat-label>
-  </mat-card-content>
-</mat-card>
+    <hr />
 
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar class="header-gral-info-image"></div>
-    <mat-card-title>
-      Jugadores
-    </mat-card-title>
-    <mat-card-subtitle>Secundaria</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <ul>
-      <li *ngFor="let player of team?.players">
-        {{ player }}
-      </li>
-    </ul>
-  </mat-card-content>
-</mat-card>
+    <div>
+      <h4>Informacion General</h4>
+      <ul>
+        <li>
+          <mat-label>Ciudad: {{ team.city }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Categoria: {{ team.category }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Rama: {{ team.mode }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Coach: {{ team.coach }}</mat-label>
+        </li>
+      </ul>
+    </div>
 
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar class="header-gral-info-image"></div>
-    <mat-card-title>
-      Proximos juegos
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    Pending
-  </mat-card-content>
-</mat-card>
+    <hr />
 
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar class="header-gral-info-image"></div>
-    <mat-card-title>
-      Records
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    Campeonas 2018
+    <div>
+      <h4>Jugadores</h4>
+      <ul>
+        <li *ngFor="let player of team?.players">
+          {{ player.name }} {{ player.lastname }}
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Proximos juegos</h4>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Destacado</h4>
+    </div>
   </mat-card-content>
 </mat-card>

@@ -4,8 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { TeamsService } from '../teams.service';
 import { Team } from '../team.model';
-import { Player } from '../../players/player.model';
-import { PlayersService } from 'src/app/players/players.service';
+import { Player } from 'src/app/players/player.model';
 
 @Component({
   selector: 'app-team-detail',
@@ -20,7 +19,6 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public teamsService: TeamsService,
-    public playersService: PlayersService,
     public route: ActivatedRoute
   ) {}
 
@@ -28,22 +26,21 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.teamId = paramMap.get('teamId');
       this.isLoading = true;
-      this.teamsService.getTeam(this.teamId).subscribe(teamData => {
-        console.log('what teamsservice get team brings');
-        this.team = {
-          id: teamData._id,
-          name: teamData.name,
-          city: teamData.city,
-          category: teamData.category,
-          mode: teamData.mode,
-          coach: teamData.coach,
-          imagePath: teamData.imagePath,
-          creator: teamData.creator,
-          players: teamData.players
-        };
-        console.log(this.team);
-        this.isLoading = false;
-      });
+    });
+    this.teamsService.getTeam(this.teamId).subscribe(teamData => {
+      this.team = {
+        id: teamData._id,
+        name: teamData.name,
+        city: teamData.city,
+        category: teamData.category,
+        mode: teamData.mode,
+        coach: teamData.coach,
+        imagePath: teamData.imagePath,
+        creator: teamData.creator,
+        players: teamData.players
+      };
+      console.log(this.team);
+      this.isLoading = false;
     });
   }
 

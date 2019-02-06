@@ -1,4 +1,5 @@
 const Team = require('../models/team');
+const Player = require('../models/player');
 
 exports.createTeam = (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
@@ -98,6 +99,7 @@ exports.getTeams = (req, res, next) => {
 
 exports.getTeam = (req, res, next) => {
   Team.findById(req.params.id)
+    .populate({ path: 'players', model: Player })
     .then(team => {
       if (team) {
         res.status(200).json(team);
@@ -106,6 +108,7 @@ exports.getTeam = (req, res, next) => {
       }
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: 'Fetching team failed'
       });

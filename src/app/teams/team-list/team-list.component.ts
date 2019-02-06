@@ -22,12 +22,11 @@ export class TeamListComponent implements OnInit, OnDestroy {
   pageSizeOptions = [1, 2, 5, 10];
   userIsAuthenticated = false;
   userId: string;
+  selectedCity: string;
+  selectedMode: string;
+  selectedCategory: string;
   private teamsSub: Subscription;
   private authStateSubs: Subscription;
-
-  selectedCity;
-  selectedMode;
-  selectedCategory;
 
   constructor(
     public teamsService: TeamsService,

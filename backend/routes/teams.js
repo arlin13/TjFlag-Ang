@@ -15,6 +15,8 @@ router.get('', TeamController.getTeams);
 
 router.get('/:id', TeamController.getTeam);
 
+router.get('/');
+
 router.delete('/:id', checkAuth, TeamController.deleteTeam);
 
 module.exports = router;
