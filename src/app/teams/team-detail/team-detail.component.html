@@ -33,7 +33,13 @@
       <h4>Jugadores</h4>
       <ul>
         <li *ngFor="let player of team?.players">
-          {{ player.name }} {{ player.lastname }}
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/players/detail', player.id]"
+          >
+            {{ player.name }} {{ player.lastname }}
+          </a>
         </li>
       </ul>
     </div>

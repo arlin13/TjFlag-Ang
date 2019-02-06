@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Team } from './team.model';
+import { Player } from '../players/player.model';
 
 const BACKEND_URL = environment.apiUrl + '/teams/';
 
@@ -68,7 +69,7 @@ export class TeamsService {
       coach: string;
       imagePath: string;
       creator: string;
-      players: any[];
+      players: Player[];
     }>(BACKEND_URL + id);
   }
 
@@ -79,7 +80,7 @@ export class TeamsService {
     mode: string,
     coach: string,
     image: File,
-    players: string[]
+    players: Player[]
   ) {
     const teamData = new FormData();
     teamData.append('name', name);
@@ -105,7 +106,7 @@ export class TeamsService {
     mode: string,
     coach: string,
     image: File | string,
-    players: string[]
+    players: Player[]
   ) {
     let teamData: Team | FormData;
     if (typeof image === 'object') {

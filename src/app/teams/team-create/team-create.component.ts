@@ -32,7 +32,7 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
   currentPlayerPage = 1;
   totalPlayers = 0;
   allPlayers: Player[] = [];
-  selectedPlayers: string[] = [];
+  selectedPlayers: Player[] = [];
   players: any[] = [];
 
   private formMode = 'create';
