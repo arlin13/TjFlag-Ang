@@ -18,6 +18,17 @@ exports.createTeam = (req, res, next) => {
   team
     .save()
     .then(createdTeam => {
+      console.log('created team - players');
+      console.log(createdTeam.players.length);
+      for (var i = 0; i <= createdTeam.players.length; i++) {
+        const playerId = createdTeam.players[i];
+        Player.updateOne(
+          { _id: playerId },
+          { $push: { teams: createdTeam } }
+        ).catch(error => {
+          console.log(error);
+        });
+      }
       res.status(201).json({
         message: 'Team added successfully',
         team: {
@@ -57,6 +68,23 @@ exports.updateTeam = (req, res, next) => {
   });
   Team.updateOne({ _id: req.params.id, creator: req.userData.userId }, team)
     .then(result => {
+      for (var i = 0; i <= team.players.length; i++) {
+        const playerId = team.players[i];
+        const teamAlreadyExists = Player.findById(playerId);
+        if (!teamAlreadyExists) {
+          Player.update({ _id: playerId }, { $push: { teams: team } }).catch(
+            error => {
+              console.log(error);
+            }
+          );
+        } else {
+          Player.updateOne({ _id: playerId }, { $pull: { teams: team } }).catch(
+            error => {
+              console.log(error);
+            }
+          );
+        }
+      }
       if (result.n > 0) {
         res.status(200).json({ message: 'Update successful' });
       } else {

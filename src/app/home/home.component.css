@@ -1,3 +1,23 @@
 h1 {
   text-align: center;
 }
+
+.home-div {
+  height: 400px;
+}
+
+.home-div-small {
+  height: 200px;
+}
+
+#elflagnosune {
+  width: 100%;
+}
+
+#sponsors {
+  background: black;
+}
+
+.sponsorship {
+  height: 200px;
+}

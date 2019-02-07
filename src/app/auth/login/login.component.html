@@ -1,37 +1,57 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
-    <mat-form-field>
-      <input
-        matInput
-        ngModel
-        name="email"
-        type="email"
-        placeholder="Email"
-        #emailInput="ngModel"
-        required
-        email
-      />
-      <mat-error *ngIf="emailInput.invalid">
-        Please enter a valid email
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        ngModel
-        name="password"
-        type="password"
-        placeholder="Password"
-        #passwordInput="ngModel"
-        required
-      />
-      <mat-error *ngIf="passwordInput.invalid">
-        Please enter a valid password
-      </mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">
-      Login
-    </button>
-  </form>
-</mat-card>
+<mat-grid-list cols="8" rowHeight="fit">
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+  <mat-grid-tile colspan="6">
+    <h1>Inicia sesion</h1>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+  <mat-grid-tile colspan="6">
+    <mat-card>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form
+        (submit)="onLogin(loginForm)"
+        #loginForm="ngForm"
+        *ngIf="!isLoading"
+      >
+        <mat-form-field>
+          <input
+            matInput
+            ngModel
+            name="email"
+            type="email"
+            placeholder="Email"
+            #emailInput="ngModel"
+            required
+            email
+          />
+          <mat-error *ngIf="emailInput.invalid">
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            ngModel
+            name="password"
+            type="password"
+            placeholder="Password"
+            #passwordInput="ngModel"
+            required
+          />
+          <mat-error *ngIf="passwordInput.invalid">
+            Please enter a valid password
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          *ngIf="!isLoading"
+        >
+          Login
+        </button>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+</mat-grid-list>

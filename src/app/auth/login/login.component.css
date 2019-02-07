@@ -5,3 +5,7 @@ mat-form-field {
 mat-spinner {
   margin: auto;
 }
+
+mat-grid-list {
+  height: 500px;
+}
