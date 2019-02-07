@@ -68,7 +68,6 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
       }),
       coach: new FormControl(null),
       image: new FormControl(null, {
-        validators: [Validators.required],
         asyncValidators: [mimeType]
       }),
       players: new FormControl(null)
@@ -151,7 +150,6 @@ export class TeamCreateComponent implements OnInit, OnDestroy {
     }
     this.isLoading = true;
     if (this.formMode === 'create') {
-      console.log(this.selectedPlayers);
       this.teamsService.addTeam(
         this.form.value.name,
         this.form.value.city,

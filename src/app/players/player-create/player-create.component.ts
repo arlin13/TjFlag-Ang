@@ -7,6 +7,8 @@ import { PlayersService } from '../players.service';
 import { Player } from '../player.model';
 import { mimeType } from './mime-type.validator';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Team } from '../../teams/team.model';
+import { TeamsService } from 'src/app/teams/teams.service';
 
 @Component({
   selector: 'app-player-create',
@@ -22,15 +24,26 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
   number = '';
   division = '';
   status = '';
+
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+
+  teamsPerPage = 20;
+  currentTeamPage = 1;
+  totalTeams = 0;
+  allTeams: Team[] = [];
+  selectedTeams: Team[] = [];
+  teams: any[] = [];
+
   private mode = 'create';
   private playerId: string;
+  private teamsSub: Subscription;
   private authStatusSub: Subscription;
 
   constructor(
     public playersService: PlayersService,
+    public teamsService: TeamsService,
     public route: ActivatedRoute,
     public authService: AuthService
   ) {}
@@ -53,8 +66,10 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
       status: new FormControl(null),
       image: new FormControl(null, {
         asyncValidators: [mimeType]
-      })
+      }),
+      teams: new FormControl(null)
     });
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('playerId')) {
         this.mode = 'edit';
@@ -72,7 +87,8 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
             division: playerData.division,
             status: playerData.status,
             imagePath: playerData.imagePath,
-            creator: playerData.creator
+            creator: playerData.creator,
+            teams: playerData.teams
           };
           this.form.setValue({
             name: this.player.name,
@@ -82,7 +98,8 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
             number: this.player.number,
             division: this.player.division,
             status: this.player.status,
-            image: this.player.imagePath
+            image: this.player.imagePath,
+            teams: this.player.teams
           });
         });
       } else {
@@ -90,6 +107,19 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
         this.playerId = null;
       }
     });
+
+    this.getListOfTeams();
+  }
+
+  getListOfTeams() {
+    this.teamsService.getTeams(this.teamsPerPage, this.currentTeamPage);
+    this.teamsSub = this.teamsService
+      .getTeamUpdateListener()
+      .subscribe((teamData: { teams: Team[]; teamCount: number }) => {
+        this.isLoading = false;
+        this.totalTeams = teamData.teamCount;
+        this.allTeams = teamData.teams;
+      });
   }
 
   onImagePicked(event: Event) {
@@ -103,8 +133,17 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(file);
   }
 
+  onSelectionChange(team) {
+    if (this.selectedTeams.includes(team.id)) {
+      this.selectedTeams = this.selectedTeams.filter(id => id !== team.id);
+    } else {
+      this.selectedTeams.push(team.id);
+    }
+  }
+
   onSavePlayer() {
     if (this.form.invalid) {
+      console.log('invalid form');
       return;
     }
     this.isLoading = true;
@@ -117,7 +156,8 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
         this.form.value.number,
         this.form.value.division,
         this.form.value.status,
-        this.form.value.image
+        this.form.value.image,
+        this.selectedTeams
       );
     } else {
       this.playersService.updatePlayer(
@@ -129,7 +169,8 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
         this.form.value.number,
         this.form.value.division,
         this.form.value.status,
-        this.form.value.image
+        this.form.value.image,
+        this.selectedTeams
       );
     }
 

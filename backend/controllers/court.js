@@ -10,7 +10,7 @@ exports.createCourt = (req, res, next) => {
     longitude: req.body.longitude,
     imagePath: req.file
       ? url + '/images/' + req.file.filename
-      : url + '/images/page/User.png',
+      : url + '/images/page/Court.jpg',
     creator: req.userData.userId
   });
   court

@@ -1,0 +1,71 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<button mat-button>
+  <span
+    ><a routerLink="/players">
+      <i class="material-icons">arrow_back</i></a
+    ></span
+  >
+</button>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ player.name.toUpperCase() }}</mat-card-title>
+    <!-- <mat-card-subtitle>{{ player.category }}</mat-card-subtitle> -->
+  </mat-card-header>
+
+  <mat-card-content>
+    <hr />
+
+    <div>
+      <h4>Informacion General</h4>
+      <ul>
+        <li>
+          <mat-label
+            >Nombre: {{ player.name }} {{ player.lastname }}
+          </mat-label>
+        </li>
+        <li>
+          <mat-label
+            >Fecha de nacimiento: {{ player.dateOfBirth | date }}</mat-label
+          >
+        </li>
+        <li>
+          <mat-label>Sexo: {{ player.sex }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Categoria: {{ player.division }}</mat-label>
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Equipo(s)</h4>
+      <ul>
+        <li *ngFor="let team of player?.teams">
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/teams/detail', team._id]"
+          >
+            {{ team.name }} {{ team.city }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Estadisticas</h4>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Destacado</h4>
+    </div>
+  </mat-card-content>
+</mat-card>

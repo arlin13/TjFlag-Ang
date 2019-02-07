@@ -105,6 +105,7 @@ export class CourtsService {
     let courtData: Court | FormData;
     if (typeof image === 'object') {
       courtData = new FormData();
+      courtData.append('id', id);
       courtData.append('name', name);
       courtData.append('city', city);
       courtData.append('address', address);

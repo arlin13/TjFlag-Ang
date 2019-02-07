@@ -1,4 +1,5 @@
 const Player = require('../models/player');
+const Team = require('../models/team');
 
 exports.createPlayer = (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
@@ -13,7 +14,8 @@ exports.createPlayer = (req, res, next) => {
     imagePath: req.file
       ? url + '/images/' + req.file.filename
       : url + '/images/page/User.png',
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    teams: JSON.parse(req.body.teams)
   });
   player
     .save()
@@ -35,9 +37,13 @@ exports.createPlayer = (req, res, next) => {
 
 exports.updatePlayer = (req, res, next) => {
   let imagePath = req.body.imagePath;
+  let teams = req.body.teams;
   if (req.file) {
     const url = req.protocol + '://' + req.get('host');
     imagePath = url + '/images/' + req.file.filename;
+  }
+  if (typeof req.userData.teams === 'string') {
+    teams = JSON.parse(teams);
   }
   const player = new Player({
     _id: req.body.id,
@@ -49,7 +55,8 @@ exports.updatePlayer = (req, res, next) => {
     division: req.body.division,
     status: req.body.status,
     imagePath: imagePath,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    teams: teams
   });
   Player.updateOne({ _id: req.params.id, creator: req.userData.userId }, player)
     .then(result => {
@@ -96,6 +103,7 @@ exports.getPlayers = (req, res, next) => {
 
 exports.getPlayer = (req, res, next) => {
   Player.findById(req.params.id)
+    .populate({ path: 'teams', model: Team })
     .then(player => {
       if (player) {
         res.status(200).json(player);

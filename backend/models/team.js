@@ -5,8 +5,8 @@ const teamSchema = mongoose.Schema({
   city: { type: String, required: true },
   category: { type: String, required: true },
   mode: { type: String, required: true },
-  coach: { type: String, required: true },
-  imagePath: { type: String, required: true },
+  coach: { type: String, required: false },
+  imagePath: { type: String, required: false },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

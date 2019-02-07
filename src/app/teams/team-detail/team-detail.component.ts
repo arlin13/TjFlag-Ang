@@ -26,6 +26,8 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
       this.isLoading = true;
     });
     this.teamsService.getTeam(this.teamId).subscribe(teamData => {
+      console.log('team info');
+      console.log(teamData);
       this.team = {
         id: teamData._id,
         name: teamData.name,
@@ -37,6 +39,7 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
         creator: teamData.creator,
         players: teamData.players
       };
+      console.log(this.team);
       this.isLoading = false;
     });
   }

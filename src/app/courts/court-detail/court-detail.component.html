@@ -1,5 +1,11 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
+<button mat-button>
+  <span
+    ><a routerLink="/courts"> <i class="material-icons">arrow_back</i></a></span
+  >
+</button>
+
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{ court.name.toUpperCase() }}</mat-card-title>

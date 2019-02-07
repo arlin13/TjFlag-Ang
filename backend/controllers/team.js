@@ -11,7 +11,7 @@ exports.createTeam = (req, res, next) => {
     coach: req.body.coach,
     imagePath: req.file
       ? url + '/images/' + req.file.filename
-      : url + '/images/page/User.png',
+      : url + '/images/page/Team.png',
     creator: req.userData.userId,
     players: JSON.parse(req.body.players)
   });

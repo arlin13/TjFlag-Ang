@@ -1,3 +1,5 @@
+import { Team } from '../teams/team.model';
+
 export interface Player {
   id: string;
   name: string;
@@ -9,4 +11,5 @@ export interface Player {
   status: string;
   imagePath: string;
   creator: string;
+  teams: Team[];
 }

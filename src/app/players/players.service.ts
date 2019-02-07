@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Player } from './player.model';
+import { Team } from '../teams/team.model';
 
 const BACKEND_URL = environment.apiUrl + '/players/';
 
@@ -39,7 +40,8 @@ export class PlayersService {
                 division: player.division,
                 status: player.status,
                 imagePath: player.imagePath,
-                creator: player.creator
+                creator: player.creator,
+                teams: player.teams
               };
             }),
             maxPlayers: playerData.maxPlayers
@@ -71,6 +73,7 @@ export class PlayersService {
       status: string;
       imagePath: string;
       creator: string;
+      teams: Team[];
     }>(BACKEND_URL + id);
   }
 
@@ -82,7 +85,8 @@ export class PlayersService {
     number: string,
     division: string,
     status: string,
-    image: File
+    image: File,
+    teams: Team[]
   ) {
     const playerData = new FormData();
     playerData.append('name', name);
@@ -93,6 +97,7 @@ export class PlayersService {
     playerData.append('division', division);
     playerData.append('status', status);
     playerData.append('image', image, name);
+    playerData.append('teams', JSON.stringify(teams));
 
     this.http
       .post<{ message: string; player: Player }>(BACKEND_URL, playerData)
@@ -110,7 +115,8 @@ export class PlayersService {
     number: string,
     division: string,
     status: string,
-    image: File | string
+    image: File | string,
+    teams: Team[]
   ) {
     let playerData: Player | FormData;
     if (typeof image === 'object') {
@@ -124,6 +130,7 @@ export class PlayersService {
       playerData.append('division', division);
       playerData.append('status', status);
       playerData.append('image', image, name);
+      playerData.append('teams', JSON.stringify(teams));
     } else {
       playerData = {
         id: id,
@@ -135,7 +142,8 @@ export class PlayersService {
         division: division,
         status: status,
         imagePath: image,
-        creator: null
+        creator: null,
+        teams: teams
       };
     }
     this.http.put(BACKEND_URL + id, playerData).subscribe(response => {

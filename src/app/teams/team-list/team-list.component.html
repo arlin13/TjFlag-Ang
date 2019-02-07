@@ -78,7 +78,7 @@
 
   <mat-divider></mat-divider>
 
-  <div id="teamList" *ngIf="teams.length > 0">
+  <div id="teamList" *ngIf="teams.length > 0 && !isLoading">
     <mat-card *ngFor="let team of filteredTeams">
       <mat-card-header>
         <div mat-card-avatar class="team-image">

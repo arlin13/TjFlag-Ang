@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <span class="spacer"></span>
 
-<div>
+<div *ngIf="!isLoading">
   <div id="top" class="clearfix">
     <h1>JUGADORES</h1>
     <div class="right top-bottom-small-margin" *ngIf="userIsAuthenticated">
@@ -9,14 +9,17 @@
     </div>
   </div>
 
-  <div id="filters">
-    <mat-card>
-      <mat-card-subtitle>
-        <p class="top-bottom-margin">Filtrando en base a:</p>
-      </mat-card-subtitle>
-
-      <mat-card-content>
-        <mat-grid-list cols="3" rowHeight="30px">
+  <div id="filters" *ngIf="players.length > 0">
+    <mat-accordion class="headers-align">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>sort</mat-icon>
+            <label> Filtros</label>
+          </mat-panel-title>
+          <mat-panel-description> </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="3" rowHeight="75px">
           <!-- Sexo -->
           <mat-grid-tile>
             <mat-form-field>
@@ -46,52 +49,68 @@
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
-      </mat-card-content>
-
-      <mat-card-footer>
-        <div class="clearfix top-bottom-small-margin">
-          <button class="right" mat-button (click)="onResetFilters()">
-            Resetear filtros
-          </button>
-        </div>
-      </mat-card-footer>
-    </mat-card>
-  </div>
-  <hr />
-
-  <div id="playerList">
-    <mat-accordion multi="true" *ngIf="players.length > 0 && !isLoading">
-      <mat-expansion-panel *ngFor="let player of filteredPlayers">
-        <mat-expansion-panel-header>
-          # {{ player.number }} - {{ player.name }} {{ player.lastname }}
-        </mat-expansion-panel-header>
-        <mat-grid-list cols="4" rowHeight="2:1">
-          <mat-grid-tile colspan="1">
-            <div class="player-image">
-              <img [src]="player.imagePath" [alt]="player.name" />
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="3">
-            <span>Fecha de nacimiento: {{ player.dateOfBirth | date }}</span>
-            <span>Division: {{ player.division }}</span>
-            <span>Equipos(s): Pendiente</span>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <mat-action-row
-          *ngIf="userIsAuthenticated && userId === player.creator"
-        >
-          <a
-            mat-button
-            color="primary"
-            [routerLink]="['/players/edit', player.id]"
-            >EDIT</a
-          >
-          <button mat-button color="warn" (click)="onDelete(player.id)">
-            DELETE
-          </button>
-        </mat-action-row>
+        <mat-card-footer>
+          <div class="clearfix top-bottom-small-margin">
+            <button class="right" mat-button (click)="onResetFilters()">
+              Resetear filtros
+            </button>
+          </div>
+        </mat-card-footer>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div id="playerList" *ngIf="players.length > 0 && !isLoading">
+    <mat-card *ngFor="let player of filteredPlayers">
+      <mat-card-header>
+        <div mat-card-avatar class="player-image">
+          <img [src]="player.imagePath" [alt]="player.name" />
+        </div>
+        <mat-card-title>
+          # {{ player.number }} - {{ player.name }} {{ player.lastname }}
+        </mat-card-title>
+        <mat-card-subtitle> </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="1.15em">
+          <mat-grid-tile>
+            <p>Fecha de nacimiento: {{ player.dateOfBirth | date }}</p>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <p>Division: {{ player.division }}</p>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <p>Equipos(s): Pendiente</p>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+
+      <mat-action-row>
+        <a
+          mat-button
+          color="primary"
+          [routerLink]="['/players/detail', player.id]"
+          >VER MÁS</a
+        >
+        <a
+          mat-button
+          *ngIf="userIsAuthenticated && userId === player.creator"
+          color="primary"
+          [routerLink]="['/players/edit', player.id]"
+          >EDITAR</a
+        >
+        <button
+          *ngIf="userIsAuthenticated && userId === player.creator"
+          mat-button
+          color="warn"
+          (click)="onDelete(player.id)"
+        >
+          BORRAR
+        </button>
+      </mat-action-row>
+    </mat-card>
   </div>
 
   <div id="paginator">

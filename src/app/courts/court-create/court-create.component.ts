@@ -48,7 +48,6 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
       latitude: new FormControl(null),
       longitude: new FormControl(null),
       image: new FormControl(null, {
-        validators: [Validators.required],
         asyncValidators: [mimeType]
       })
     });
@@ -111,6 +110,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
         this.form.value.image
       );
     } else {
+      console.log(this.form.value.image);
       this.courtsService.updateCourt(
         this.courtId,
         this.form.value.name,

@@ -12,6 +12,7 @@ import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
 import { CourtListComponent } from './courts/court-list/court-list.component';
 import { CourtCreateComponent } from './courts/court-create/court-create.component';
 import { CourtDetailComponent } from './courts/court-detail/court-detail.component';
+import { PlayerDetailComponent } from './players/player-detail/player-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +33,10 @@ const routes: Routes = [
     path: 'players/edit/:playerId',
     component: PlayerCreateComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'players/detail/:playerId',
+    component: PlayerDetailComponent
   },
   { path: 'teams', component: TeamListComponent },
   {
