@@ -8,7 +8,7 @@ const playerSchema = mongoose.Schema({
   number: { type: String, required: false },
   division: { type: String, required: false },
   status: { type: String, required: false },
-  imagePath: { type: String, required: true },
+  imagePath: { type: String, required: false },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 

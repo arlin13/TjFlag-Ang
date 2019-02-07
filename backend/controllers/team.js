@@ -9,7 +9,9 @@ exports.createTeam = (req, res, next) => {
     category: req.body.category,
     mode: req.body.mode,
     coach: req.body.coach,
-    imagePath: url + '/images/' + req.file.filename,
+    imagePath: req.file
+      ? url + '/images/' + req.file.filename
+      : url + '/images/page/User.png',
     creator: req.userData.userId,
     players: JSON.parse(req.body.players)
   });

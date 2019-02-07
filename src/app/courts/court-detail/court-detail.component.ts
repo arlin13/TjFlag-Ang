@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
+import { AgmCoreModule } from '@agm/core';
+
 import { CourtsService } from '../courts.service';
 import { Court } from '../court.model';
 
@@ -14,6 +16,8 @@ export class CourtDetailComponent implements OnInit, OnDestroy {
   isLoading = false;
   imagePreview: string;
   private courtId: string;
+  lat: number;
+  long: number;
 
   constructor(
     public courtsService: CourtsService,
@@ -30,13 +34,15 @@ export class CourtDetailComponent implements OnInit, OnDestroy {
         id: courtData._id,
         name: courtData.name,
         city: courtData.city,
-        description: courtData.description,
+        address: courtData.address,
         latitude: courtData.latitude,
         longitude: courtData.longitude,
         imagePath: courtData.imagePath,
         creator: courtData.creator
       };
       this.isLoading = false;
+      this.lat = this.court.latitude;
+      this.long = this.court.longitude;
     });
   }
 

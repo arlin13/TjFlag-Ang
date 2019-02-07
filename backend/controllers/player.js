@@ -10,7 +10,9 @@ exports.createPlayer = (req, res, next) => {
     number: req.body.number,
     division: req.body.division,
     status: req.body.status,
-    imagePath: url + '/images/' + req.file.filename,
+    imagePath: req.file
+      ? url + '/images/' + req.file.filename
+      : url + '/images/page/User.png',
     creator: req.userData.userId
   });
   player

@@ -2,7 +2,7 @@ export interface Court {
   id: string;
   name: string;
   city: string;
-  description: string;
+  address: string;
   latitude: number;
   longitude: number;
   imagePath: string;

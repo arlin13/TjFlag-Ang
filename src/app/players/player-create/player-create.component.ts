@@ -52,7 +52,6 @@ export class PlayerCreateComponent implements OnInit, OnDestroy {
       division: new FormControl(null, { validators: [Validators.required] }),
       status: new FormControl(null),
       image: new FormControl(null, {
-        validators: [Validators.required],
         asyncValidators: [mimeType]
       })
     });

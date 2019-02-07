@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const courtSchema = mongoose.Schema({
   name: { type: String, required: true },
   city: { type: String, required: true },
-  description: { type: String, required: false },
+  address: { type: String, required: false },
   latitude: { type: Number, required: false },
   longitude: { type: Number, required: false },
   imagePath: { type: String, required: false },

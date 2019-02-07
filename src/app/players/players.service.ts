@@ -115,6 +115,7 @@ export class PlayersService {
     let playerData: Player | FormData;
     if (typeof image === 'object') {
       playerData = new FormData();
+      playerData.append('id', id);
       playerData.append('name', name);
       playerData.append('lastname', lastname);
       playerData.append('dateOfBirth', dateOfBirth);

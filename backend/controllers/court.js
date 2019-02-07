@@ -5,9 +5,12 @@ exports.createCourt = (req, res, next) => {
   const court = new Court({
     name: req.body.name,
     city: req.body.city,
+    address: req.body.address,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
-    imagePath: url + '/images/' + req.file.filename,
+    imagePath: req.file
+      ? url + '/images/' + req.file.filename
+      : url + '/images/page/User.png',
     creator: req.userData.userId
   });
   court
@@ -39,6 +42,7 @@ exports.updateCourt = (req, res, next) => {
     _id: req.body.id,
     name: req.body.name,
     city: req.body.city,
+    address: req.body.address,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     imagePath: imagePath,

@@ -3,7 +3,6 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{ court.name.toUpperCase() }}</mat-card-title>
-    <!-- <mat-card-subtitle>{{ court.category }}</mat-card-subtitle> -->
   </mat-card-header>
 
   <mat-card-content>
@@ -16,13 +15,7 @@
           <mat-label>Cancha en {{ court.city }}</mat-label>
         </li>
         <li>
-          <mat-label>{{ court.description }}</mat-label>
-        </li>
-        <li>
-          <mat-label>Lat: {{ court.latitude }}</mat-label>
-        </li>
-        <li>
-          <mat-label>Long: {{ court.longitude }}</mat-label>
+          <mat-label>{{ court.address }}</mat-label>
         </li>
       </ul>
     </div>
@@ -31,7 +24,9 @@
 
     <div>
       <h4>MAPA</h4>
-      TODO
+      <agm-map [latitude]="lat" [longitude]="long">
+        <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+      </agm-map>
     </div>
   </mat-card-content>
 </mat-card>

@@ -6,6 +6,8 @@ export const mimeType = (
 ): Promise<{ [key: string]: any }> | Observable<{ [key: string]: any }> => {
   if (typeof control.value === 'string') {
     return of(null);
+  } else if (control.value === null) {
+    return of(null);
   }
   const file = control.value as File;
   const fileReader = new FileReader();

@@ -15,6 +15,7 @@ import { PostsModule } from './posts/posts.module';
 import { PlayerModule } from './players/players.module';
 import { TeamModule } from './teams/teams.module';
 import { CourtModule } from './courts/court.module';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ErrorComponent],
@@ -24,6 +25,7 @@ import { CourtModule } from './courts/court.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AngularMaterialModule,
+    AgmCoreModule.forRoot({ apiKey: 'a604dac39694bb758668989e417c4580' }),
     HomeModule,
     PostsModule,
     PlayerModule,

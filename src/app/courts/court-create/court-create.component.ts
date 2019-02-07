@@ -17,7 +17,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
   court: Court;
   name = '';
   city = '';
-  description = '';
+  address = '';
   latitude = '';
   longitude = '';
   isLoading = false;
@@ -44,7 +44,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
         validators: [Validators.required]
       }),
       city: new FormControl(null, { validators: [Validators.required] }),
-      description: new FormControl(null),
+      address: new FormControl(null),
       latitude: new FormControl(null),
       longitude: new FormControl(null),
       image: new FormControl(null, {
@@ -63,7 +63,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
             id: courtData._id,
             name: courtData.name,
             city: courtData.city,
-            description: courtData.description,
+            address: courtData.address,
             latitude: courtData.latitude,
             longitude: courtData.longitude,
             imagePath: courtData.imagePath,
@@ -72,7 +72,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
           this.form.setValue({
             name: this.court.name,
             city: this.court.city,
-            description: this.court.description,
+            address: this.court.address,
             latitude: this.court.latitude,
             longitude: this.court.longitude,
             image: this.court.imagePath
@@ -105,7 +105,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
       this.courtsService.addCourt(
         this.form.value.name,
         this.form.value.city,
-        this.form.value.description,
+        this.form.value.address,
         this.form.value.latitude,
         this.form.value.longitude,
         this.form.value.image
@@ -115,7 +115,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
         this.courtId,
         this.form.value.name,
         this.form.value.city,
-        this.form.value.description,
+        this.form.value.address,
         this.form.value.latitude,
         this.form.value.longitude,
         this.form.value.image

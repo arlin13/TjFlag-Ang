@@ -33,7 +33,7 @@ export class CourtsService {
                 id: court._id,
                 name: court.name,
                 city: court.city,
-                description: court.description,
+                address: court.address,
                 latitude: court.latitude,
                 longitude: court.longitude,
                 imagePath: court.imagePath,
@@ -62,7 +62,7 @@ export class CourtsService {
       _id: string;
       name: string;
       city: string;
-      description: string;
+      address: string;
       latitude: number;
       longitude: number;
       imagePath: string;
@@ -73,7 +73,7 @@ export class CourtsService {
   addCourt(
     name: string,
     city: string,
-    description: string,
+    address: string,
     latitude: number,
     longitude: number,
     image: File
@@ -81,7 +81,7 @@ export class CourtsService {
     const courtData = new FormData();
     courtData.append('name', name);
     courtData.append('city', city);
-    courtData.append('description', description);
+    courtData.append('address', address);
     courtData.append('latitude', latitude.toString());
     courtData.append('longitude', longitude.toString());
     courtData.append('image', image, name);
@@ -97,7 +97,7 @@ export class CourtsService {
     id: string,
     name: string,
     city: string,
-    description: string,
+    address: string,
     latitude: number,
     longitude: number,
     image: File | string
@@ -107,7 +107,7 @@ export class CourtsService {
       courtData = new FormData();
       courtData.append('name', name);
       courtData.append('city', city);
-      courtData.append('description', description);
+      courtData.append('address', address);
       courtData.append('latitude', latitude.toString());
       courtData.append('longitude', longitude.toString());
       courtData.append('image', image, name);
@@ -116,7 +116,7 @@ export class CourtsService {
         id: id,
         name: name,
         city: city,
-        description: description,
+        address: address,
         latitude: latitude,
         longitude: longitude,
         imagePath: image,
