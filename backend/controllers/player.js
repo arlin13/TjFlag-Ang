@@ -20,6 +20,15 @@ exports.createPlayer = (req, res, next) => {
   player
     .save()
     .then(createdPlayer => {
+      for (var i = 0; i <= createdPlayer.teams.length; i++) {
+        const teamId = createdPlayer.teams[i];
+        Team.update(
+          { _id: teamId },
+          { $push: { players: createdPlayer } }
+        ).catch(error => {
+          console.log(error);
+        });
+      }
       res.status(201).json({
         message: 'Player added successfully',
         player: {
@@ -29,6 +38,7 @@ exports.createPlayer = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: 'Creating a player failed'
       });

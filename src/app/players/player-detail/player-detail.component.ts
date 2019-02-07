@@ -39,7 +39,6 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
         creator: playerData.creator,
         teams: playerData.teams
       };
-      console.log(this.player.teams);
       this.isLoading = false;
     });
   }
