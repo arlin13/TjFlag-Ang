@@ -3,6 +3,10 @@
   margin-top: 1rem;
 }
 
+h1 {
+  text-align: center;
+}
+
 mat-spinner {
   margin: auto;
 }
@@ -11,20 +15,17 @@ mat-paginator {
   margin-top: 1rem;
 }
 
-h1 {
-  text-align: center;
-}
-
 .info-text {
   text-align: center;
 }
 
-.team-image {
+.tournament-image {
   widows: 100%;
 }
 
-.team-image img {
-  width: 100%;
+.tournament-image img {
+  width: 75%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .top-bottom-margin {
@@ -33,10 +34,6 @@ h1 {
 
 .top-bottom-small-margin {
   margin: 5px 0;
-}
-
-.left-right-smarll-margin {
-  margin: 0 10px;
 }
 
 .horizontal-left {
@@ -49,10 +46,4 @@ h1 {
 
 .right {
   float: right;
-}
-
-.mat-expansion-panel-header {
-  justify-content: space-between;
-  align-items: center;
-  flex-basis: 0;
 }

@@ -5,11 +5,11 @@
   <div id="top" class="clearfix">
     <h1>JUGADORES</h1>
     <div class="right top-bottom-small-margin" *ngIf="userIsAuthenticated">
-      <span><a routerLink="/players/create"> + Agregar</a></span>
+      <span><a routerLink="/tournaments/create"> + Agregar</a></span>
     </div>
   </div>
 
-  <div id="filters" *ngIf="players.length > 0">
+  <div id="filters" *ngIf="tournaments.length > 0">
     <mat-accordion class="headers-align">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -62,24 +62,25 @@
 
   <mat-divider></mat-divider>
 
-  <div id="playerList" *ngIf="players.length > 0 && !isLoading">
-    <mat-card *ngFor="let player of filteredPlayers">
+  <div id="tournamentList" *ngIf="tournaments.length > 0 && !isLoading">
+    <mat-card *ngFor="let tournament of filteredPlayers">
       <mat-card-header>
-        <div mat-card-avatar class="player-image">
-          <img [src]="player.imagePath" [alt]="player.name" />
+        <div mat-card-avatar class="tournament-image">
+          <img [src]="tournament.imagePath" [alt]="tournament.name" />
         </div>
         <mat-card-title>
-          # {{ player.number }} - {{ player.name }} {{ player.lastname }}
+          # {{ tournament.number }} - {{ tournament.name }}
+          {{ tournament.lastname }}
         </mat-card-title>
         <mat-card-subtitle> </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <mat-grid-list cols="2" rowHeight="1.15em">
           <mat-grid-tile>
-            <p>Fecha de nacimiento: {{ player.dateOfBirth | date }}</p>
+            <p>Fecha de nacimiento: {{ tournament.dateOfBirth | date }}</p>
           </mat-grid-tile>
           <mat-grid-tile>
-            <p>Division: {{ player.division }}</p>
+            <p>Division: {{ tournament.division }}</p>
           </mat-grid-tile>
           <mat-grid-tile>
             <p>Equipos(s): Pendiente</p>
@@ -91,21 +92,21 @@
         <a
           mat-button
           color="primary"
-          [routerLink]="['/players/detail', player.id]"
+          [routerLink]="['/tournaments/detail', tournament.id]"
           >VER MÁS</a
         >
         <a
           mat-button
-          *ngIf="userIsAuthenticated && userId === player.creator"
+          *ngIf="userIsAuthenticated && userId === tournament.creator"
           color="primary"
-          [routerLink]="['/players/edit', player.id]"
+          [routerLink]="['/tournaments/edit', tournament.id]"
           >EDITAR</a
         >
         <button
-          *ngIf="userIsAuthenticated && userId === player.creator"
+          *ngIf="userIsAuthenticated && userId === tournament.creator"
           mat-button
           color="warn"
-          (click)="onDelete(player.id)"
+          (click)="onDelete(tournament.id)"
         >
           BORRAR
         </button>
@@ -116,15 +117,15 @@
   <div id="paginator">
     <mat-paginator
       [length]="totalPlayers"
-      [pageSize]="playersPerPage"
+      [pageSize]="tournamentsPerPage"
       [pageSizeOptions]="pageSizeOptions"
       (page)="onChangedPage($event)"
-      *ngIf="players.length > 0"
+      *ngIf="tournaments.length > 0"
     >
     </mat-paginator>
   </div>
 
-  <p class="info-text mat-body-1" *ngIf="players.length <= 0 && !isLoading">
-    No players added yet
+  <p class="info-text mat-body-1" *ngIf="tournaments.length <= 0 && !isLoading">
+    No tournaments added yet
   </p>
 </div>

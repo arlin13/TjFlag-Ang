@@ -1,0 +1,75 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<button mat-button>
+  <span
+    ><a routerLink="/tournaments">
+      <i class="material-icons">arrow_back</i></a
+    ></span
+  >
+</button>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ tournament.name.toUpperCase() }}</mat-card-title>
+    <!-- <mat-card-subtitle>{{ tournament.category }}</mat-card-subtitle> -->
+  </mat-card-header>
+
+  <mat-card-content>
+    <hr />
+
+    <div>
+      <h4>Informacion General</h4>
+      <ul>
+        <li>
+          <mat-label>Nombre: {{ tournament.name }} </mat-label>
+        </li>
+        <li>
+          <mat-label>Ciudad: {{ tournament.city }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Fecha inicio: {{ tournament.startDate | date }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Fecha fin: {{ tournament.endDate | date }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Categoria: {{ tournament.division }}</mat-label>
+        </li>
+        <li>
+          <mat-label>Modalidad: {{ tournament.mode }}</mat-label>
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Equipo(s)</h4>
+      <ul>
+        <li *ngFor="let team of tournament?.teams">
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/teams/detail', team._id]"
+          >
+            {{ team.name }} {{ team.city }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Campeones</h4>
+      <ul>
+        <li>
+          Campeon
+        </li>
+        <li>
+          Sub-campeon
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>

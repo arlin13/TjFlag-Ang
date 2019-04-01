@@ -15,9 +15,11 @@ h1 {
 }
 
 #sponsors {
-  background: black;
+  background: gray;
 }
 
 .sponsorship {
-  height: 200px;
+  height: 100px;
+  margin: 10px;
+  text-align: center;
 }

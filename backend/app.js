@@ -8,6 +8,7 @@ const userRoutes = require('./routes/user');
 const playersRoutes = require('./routes/players');
 const teamsRoutes = require('./routes/teams');
 const courtsRoutes = require('./routes/courts');
+const tournamentsRoutes = require('./routes/tournaments');
 
 const app = express();
 
@@ -47,5 +48,6 @@ app.use('/api/user', userRoutes);
 app.use('/api/players', playersRoutes);
 app.use('/api/teams', teamsRoutes);
 app.use('/api/courts', courtsRoutes);
+app.use('/api/tournaments', tournamentsRoutes);
 
 module.exports = app;

@@ -11,13 +11,14 @@
 
   <div id="filters" *ngIf="teams.length > 0">
     <mat-accordion class="headers-align">
-      <mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <mat-icon>sort</mat-icon>
             <label> Filtros</label>
           </mat-panel-title>
-          <mat-panel-description> </mat-panel-description>
+          <mat-panel-description>
+            <mat-icon>sort</mat-icon>
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-grid-list cols="3" rowHeight="75px">
           <!-- Ciudad -->
@@ -78,12 +79,75 @@
 
   <mat-divider></mat-divider>
 
+  <div id="teamList2">
+    <mat-accordion multi="true" *ngIf="teams.length > 0">
+      <mat-expansion-panel *ngFor="let team of filteredTeams">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ team.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Categoria: {{ team.category }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-grid-tile>
+          <span>Ciudad: {{ team.city }}</span>
+          <span>Rama: {{ team.mode }}</span>
+          <span>Coach: {{ team.coach }}</span>
+        </mat-grid-tile>
+        <mat-action-row>
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/teams/detail', team.id]"
+            >VER MÁS</a
+          >
+          <a
+            mat-button
+            *ngIf="userIsAuthenticated && userId === team.creator"
+            color="primary"
+            [routerLink]="['/teams/edit', team.id]"
+            >EDITAR</a
+          >
+          <button
+            *ngIf="userIsAuthenticated && userId === team.creator"
+            mat-button
+            color="warn"
+            (click)="onDelete(team.id)"
+          >
+            BORRAR
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div id="paginator">
+    <mat-paginator
+      [length]="totalTeams"
+      [pageSize]="teamsPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangedPage($event)"
+      *ngIf="teams.length > 0"
+    >
+    </mat-paginator>
+  </div>
+
+  <p class="info-text mat-body-1" *ngIf="teams.length <= 0">
+    No teams added yet
+  </p>
+</div>
+
+<!-- <button mat-button (click)="onShowFilters()" *ngIf="!showFilters">
+          Filtrar equipos
+        </button> -->
+<!-- <button mat-button (click)="onHideFilters()" *ngIf="showFilters">
+          Ocultar filtros
+        </button> -->
+<!--
   <div id="teamList" *ngIf="teams.length > 0 && !isLoading">
     <mat-card *ngFor="let team of filteredTeams">
       <mat-card-header>
-        <div mat-card-avatar class="team-image">
-          <img [src]="team.imagePath" [alt]="team.name" />
-        </div>
         <mat-card-title>{{ team.name }}</mat-card-title>
         <mat-card-subtitle>Categoria {{ team.category }}</mat-card-subtitle>
       </mat-card-header>
@@ -124,78 +188,4 @@
         </button>
       </mat-action-row>
     </mat-card>
-  </div>
-
-  <!-- <div id="teamList2">
-    <mat-accordion multi="true" *ngIf="teams.length > 0">
-      <mat-expansion-panel *ngFor="let team of filteredTeams">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ team.name }}
-          </mat-panel-title>
-          <mat-panel-description>
-            Categoria: {{ team.category }}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-grid-list cols="4" rowHeight="2:1">
-          <mat-grid-tile colspan="1">
-            <div class="team-image">
-              <img [src]="team.imagePath" [alt]="team.name" />
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="3">
-            <span>Ciudad: {{ team.city }}</span>
-            <span>Rama: {{ team.mode }}</span>
-            <span>Coach: {{ team.coach }}</span>
-            <span>Jugadores: {{ team.players }}</span>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <mat-action-row>
-          <a
-            mat-button
-            color="primary"
-            [routerLink]="['/teams/detail', team.id]"
-            >VER MÁS</a
-          >
-          <a
-            mat-button
-            *ngIf="userIsAuthenticated && userId === team.creator"
-            color="primary"
-            [routerLink]="['/teams/edit', team.id]"
-            >EDITAR</a
-          >
-          <button
-            *ngIf="userIsAuthenticated && userId === team.creator"
-            mat-button
-            color="warn"
-            (click)="onDelete(team.id)"
-          >
-            BORRAR
-          </button>
-        </mat-action-row>
-      </mat-expansion-panel>
-    </mat-accordion>
   </div> -->
-
-  <div id="paginator">
-    <mat-paginator
-      [length]="totalTeams"
-      [pageSize]="teamsPerPage"
-      [pageSizeOptions]="pageSizeOptions"
-      (page)="onChangedPage($event)"
-      *ngIf="teams.length > 0"
-    >
-    </mat-paginator>
-  </div>
-
-  <p class="info-text mat-body-1" *ngIf="teams.length <= 0">
-    No teams added yet
-  </p>
-</div>
-
-<!-- <button mat-button (click)="onShowFilters()" *ngIf="!showFilters">
-          Filtrar equipos
-        </button> -->
-<!-- <button mat-button (click)="onHideFilters()" *ngIf="showFilters">
-          Ocultar filtros
-        </button> -->
