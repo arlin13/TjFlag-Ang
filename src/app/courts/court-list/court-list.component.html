@@ -52,15 +52,12 @@
   <div id="courtList" *ngIf="courts.length > 0">
     <mat-card *ngFor="let court of filteredCourts">
       <mat-card-header>
-        <div mat-card-avatar class="court-image">
-          <img [src]="court.imagePath" [alt]="court.name" />
-        </div>
         <mat-card-title>{{ court.name }}</mat-card-title>
         <mat-card-subtitle>{{ court.city }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <mat-grid-list cols="2" rowHeight="1.15em">
+        <mat-grid-list cols="2" rowHeight="1.25em">
           <mat-grid-tile>
             <p>{{ court.address }}</p>
           </mat-grid-tile>
