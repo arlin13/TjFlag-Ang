@@ -5,7 +5,8 @@
   <div id="top" class="clearfix">
     <h1>CANCHAS</h1>
     <div class="right top-bottom-small-margin" *ngIf="userIsAuthenticated">
-      <span><a routerLink="/courts/create"> + Agregar</a></span>
+      <!-- <span><a routerLink="/courts/create"> + Agregar</a></span> -->
+      <mat-icon routerLink="/courts/create">add_circle_outline</mat-icon>
     </div>
   </div>
 
@@ -50,39 +51,19 @@
   <mat-divider></mat-divider>
 
   <div id="courtList" *ngIf="courts.length > 0">
-    <mat-card *ngFor="let court of filteredCourts">
+    <mat-card
+      *ngFor="let court of filteredCourts"
+      [routerLink]="['/courts/detail', court.id]"
+    >
       <mat-card-header>
         <mat-card-title>{{ court.name }}</mat-card-title>
         <mat-card-subtitle>{{ court.city }}</mat-card-subtitle>
       </mat-card-header>
-
-      <mat-card-content>
-        <mat-grid-list cols="2" rowHeight="1.25em">
-          <mat-grid-tile>
-            <p>{{ court.address }}</p>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-card-content>
-      <mat-action-row>
-        <a
-          mat-button
-          color="primary"
-          [routerLink]="['/courts/detail', court.id]"
-          >VER MÁS</a
-        >
-        <a
-          mat-button
-          *ngIf="userIsAuthenticated && userId === court.creator"
-          color="primary"
-          [routerLink]="['/courts/edit', court.id]"
+      <mat-action-row *ngIf="userIsAuthenticated && userId === court.creator">
+        <a mat-button color="primary" [routerLink]="['/courts/edit', court.id]"
           >EDITAR</a
         >
-        <button
-          *ngIf="userIsAuthenticated && userId === court.creator"
-          mat-button
-          color="warn"
-          (click)="onDelete(court.id)"
-        >
+        <button mat-button color="warn" (click)="onDelete(court.id)">
           BORRAR
         </button>
       </mat-action-row>
