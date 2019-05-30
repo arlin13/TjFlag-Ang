@@ -72,8 +72,9 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
             name: this.court.name,
             city: this.court.city,
             address: this.court.address,
-            latitude: this.court.latitude,
-            longitude: this.court.longitude,
+            latitude: this.court.latitude != null ? this.court.latitude : null,
+            longitude:
+              this.court.longitude != null ? this.court.longitude : null,
             image: this.court.imagePath
           });
         });
@@ -110,7 +111,7 @@ export class CourtCreateComponent implements OnInit, OnDestroy {
         this.form.value.image
       );
     } else {
-      console.log(this.form.value.image);
+      // console.log(this.form.value.image);
       this.courtsService.updateCourt(
         this.courtId,
         this.form.value.name,

@@ -65,7 +65,8 @@
       </mat-error>
     </mat-form-field>
 
-    <div>
+    <!-- no picture for courts -->
+    <!-- <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">
         Pick Image
       </button>
@@ -76,7 +77,7 @@
       *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
     >
       <img [src]="imagePreview" [alt]="form.value.name" />
-    </div>
+    </div> -->
 
     <div class="clearfix">
       <button mat-raised-button color="accent">

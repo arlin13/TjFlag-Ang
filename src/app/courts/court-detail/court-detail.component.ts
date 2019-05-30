@@ -25,6 +25,8 @@ export class CourtDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log('inside court service get court');
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.courtId = paramMap.get('courtId');
       this.isLoading = true;

@@ -82,8 +82,12 @@ export class CourtsService {
     courtData.append('name', name);
     courtData.append('city', city);
     courtData.append('address', address);
-    courtData.append('latitude', latitude.toString());
-    courtData.append('longitude', longitude.toString());
+    if (latitude != null) {
+      courtData.append('latitude', latitude.toString());
+    }
+    if (longitude != null) {
+      courtData.append('longitude', longitude.toString());
+    }
     courtData.append('image', image, name);
 
     this.http

@@ -4,7 +4,10 @@
 <div *ngIf="!isLoading">
   <div id="top" class="clearfix">
     <h1>CANCHAS</h1>
-    <div class="right top-bottom-small-margin" *ngIf="userIsAuthenticated">
+    <div
+      class="right top-bottom-small-margin pointer"
+      *ngIf="userIsAuthenticated"
+    >
       <!-- <span><a routerLink="/courts/create"> + Agregar</a></span> -->
       <mat-icon routerLink="/courts/create">add_circle_outline</mat-icon>
     </div>
