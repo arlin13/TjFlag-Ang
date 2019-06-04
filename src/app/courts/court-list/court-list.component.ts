@@ -59,7 +59,8 @@ export class CourtListComponent implements OnInit, OnDestroy {
     this.totalCourts = this.filteredCourts.length;
   }
 
-  onSelectionChange() {
+  onSelectionChange(selectedCity) {
+    this.selectedCity = selectedCity;
     this.filteredCourts = this.courts;
     this.filterByCity();
     this.totalCourts = this.filteredCourts.length;

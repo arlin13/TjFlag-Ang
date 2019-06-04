@@ -13,7 +13,37 @@
     </div>
   </div>
 
-  <div id="filters" *ngIf="courts?.length > 0">
+  <div id="filters" *ngIf="courts?.length > 0" class="center">
+    <h3>Filtrar por: {{ group.value }}</h3>
+    <mat-button-toggle-group
+      name="citiesButtonToggleGroup"
+      aria-label="Ciudad"
+      #group="matButtonToggleGroup"
+    >
+      <mat-button-toggle
+        value="Cualquiera"
+        (change)="onSelectionChange($event.value)"
+        >Cualquiera</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="Tijuana"
+        (change)="onSelectionChange($event.value)"
+        >Tijuana</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="Ensenada"
+        (change)="onSelectionChange($event.value)"
+        >Ensenada</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="Mexicali"
+        (change)="onSelectionChange($event.value)"
+        >Mexicali</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
+
+  <!-- <div id="filters" *ngIf="courts?.length > 0">
     <mat-accordion class="headers-align">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -23,9 +53,9 @@
           </mat-panel-title>
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-grid-list cols="3" rowHeight="75px">
-          <!-- Ciudad -->
-          <mat-grid-tile>
+        <mat-grid-list cols="3" rowHeight="75px"> -->
+  <!-- Ciudad -->
+  <!-- <mat-grid-tile>
             <mat-form-field>
               <mat-select
                 [(value)]="selectedCity"
@@ -49,7 +79,7 @@
         </mat-card-footer>
       </mat-expansion-panel>
     </mat-accordion>
-  </div>
+  </div> -->
 
   <mat-divider></mat-divider>
 
